@@ -21,12 +21,12 @@ from sharedfunctions.print import print_success
 
 
 ### create indexes 
-run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`policies` to create a primary index")
-run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`orders` to create a primary index")
-run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`products` to create a primary index")
-run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`messages` to create a primary index")
-run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`message_responses` to create a primary index")
-run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`refund_tickets` to create a primary index")
+# run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`policies` to create a primary index")
+# run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`orders` to create a primary index")
+# run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`products` to create a primary index")
+# run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`messages` to create a primary index")
+# run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`message_responses` to create a primary index")
+# run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`refund_tickets` to create a primary index")
 
 
 
