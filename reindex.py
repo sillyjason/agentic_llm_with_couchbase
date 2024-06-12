@@ -4,7 +4,7 @@ from datetime import timedelta
 from langchainagents.embedding import create_openai_embeddings
 from couchbaseops import insert_doc, flush_collection
 import json
-from notifications.print import print_success
+from sharedfunctions.print import print_success
 
 #delete current docs. curently not working so resorting to the more primitive method
 # query = '''
