@@ -9,7 +9,7 @@ from couchbase.auth import PasswordAuthenticator
 from datetime import timedelta
 import os 
 import couchbase.subdocument as SD
-from notifications.print import print_success
+from sharedfunctions.print import print_success
 
 
 load_dotenv()
@@ -153,7 +153,7 @@ def mutliple_subdoc_upsert(bucket, scope, collection, doc_id, path_value_dict):
 def run_query(query):
     try:
         result = cluster.query(query)
-        
+        print(f"Query successful: {query}, result: {result}")
         return result
         
     except Exception as e:

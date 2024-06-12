@@ -2,7 +2,7 @@ from couchbaseops import cluster
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from datetime import timedelta
 from langchainagents.embedding import create_openai_embeddings
-from couchbaseops import insert_doc, flush_collection
+from couchbaseops import insert_doc, flush_collection, run_query
 import json
 from sharedfunctions.print import print_success
 
@@ -17,6 +17,17 @@ from sharedfunctions.print import print_success
 
 # except Exception as e:
 #     print("exception:", e)
+
+
+
+### create indexes 
+run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`policies` to create a primary index")
+run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`orders` to create a primary index")
+run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`products` to create a primary index")
+run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`messages` to create a primary index")
+run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`message_responses` to create a primary index")
+run_query("CREATE PRIMARY INDEX ON `default`:`main`.`data`.`refund_tickets` to create a primary index")
+
 
 
 ### flush all existing collections ###

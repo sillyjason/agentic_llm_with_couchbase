@@ -1,59 +1,3 @@
-/*
-This Terraform templates sets up the necessary instances needed to run this Couchbase Chatbot application.
-You'll need at least one VM to run the chatbot application and a Couchbase cluster as the backend. 
-
-Before running this file, you'll need to create a terraform.template.tfvars and a variables.tf file. Follow the blog post below:
-https://www.couchbase.com/blog/terraform-provider-couchbase-capella/
-
-You'll also need to get your Capella Organization ID, Project ID, and Authentication Token, the details of which is also documented in the blog post.
-
-Also get your AWS access key and secret key from the AWS console. 
-*/
-
-
-
-#aws vm instance for running the chatbot
-provider "aws" {
-    region = "ap-southeast-1"
-    access_key = var.access_key
-    secret_key = var.secret_key
-}
-
-resource "aws_instance" "web" {
-  ami           = "ami-0b287aaaab87c114d"
-  instance_type = "t3.2xlarge"
-  vpc_security_group_ids = ["sg-0bf97419aaad88160"] // if no security group needs be specified, delete this line
-
-  user_data = <<-EOF
-                #!/bin/bash
-                sudo yum update -y
-                sudo yum install git -y
-                sudo yum install python3 -y
-                sudo yum install python3-pip -y
-                git clone https://github.com/sillyjason/chatbot-cb-2
-                cd chatbot-cb-2
-                python3 -m venv venv
-                source venv/bin/activate
-                pip install -r requirements.txt
-                cat > .env <<- EOF
-                #EE Environment Variables
-                
-
-                #Capella Environment Variables
-                
-
-                #Chatbot Endpoint
-                
-                #CB User Credential
-
-                #LLM Keys
-                EOF
-
-  tags = {
-    Name = "rag-with-couchbase"
-  }
-}
-
 #capella setup 
 terraform {
   required_providers {
@@ -174,35 +118,8 @@ resource "couchbase-capella_bucket" "meta_bucket" {
 }
 
 
-# Create scope raw and collections raw and formatted
-resource "couchbase-capella_scope" "scope_raw" {
-    scope_name           = "raw" 
-    organization_id      = var.organization_id
-    project_id           = var.project_id
-    cluster_id           = couchbase-capella_cluster.agentic-capella-cluster.id
-    bucket_id            = couchbase-capella_bucket.main_bucket.id
-}
 
-resource "couchbase-capella_collection" "collection_raw" {
-    collection_name      = "raw"
-    organization_id      = var.organization_id
-    project_id           = var.project_id
-    cluster_id           = couchbase-capella_cluster.agentic-capella-cluster.id
-    bucket_id            = couchbase-capella_bucket.main_bucket.id
-    scope_name           = couchbase-capella_scope.scope_raw.scope_name
-}
-
-resource "couchbase-capella_collection" "collection_formatted" {
-    collection_name      = "formatted"
-    organization_id      = var.organization_id
-    project_id           = var.project_id
-    cluster_id           = couchbase-capella_cluster.agentic-capella-cluster.id
-    bucket_id            = couchbase-capella_bucket.main_bucket.id
-    scope_name           = couchbase-capella_scope.scope_raw.scope_name
-}
-
-
-# Create scope data and collections policies & products
+# Create scope data 
 resource "couchbase-capella_scope" "scope_data" {
     scope_name           = "data" 
     organization_id      = var.organization_id
