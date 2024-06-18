@@ -13,7 +13,7 @@
             ],
             "curl": [
                 {
-                    "hostname": "http://YOUR_IP_ADDRESS:5001",
+                    "hostname": "http://210.6.70.200:5001",
                     "value": "endpoint",
                     "auth_type": "no-auth",
                     "username": "",
